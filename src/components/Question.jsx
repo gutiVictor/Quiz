@@ -15,8 +15,16 @@ export const Question = ({
     const [answersRandom, setAnswersRandom] = useState([]);
     const [activeResults, setActiveResults] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState('');
+    const [usedQuestions, setUsedQuestions] = useState(new Set());
 
     useEffect(() => {
+        if (usedQuestions.has(filteredQuestion.id)) {
+            // Si la pregunta ya ha sido utilizada, selecciona una nueva pregunta
+            const newQuestion = getRandomQuestion();
+            setIndexQuestion(newQuestion.index);
+            return;
+        }
+
         const answers = [
             ...filteredQuestion.incorrect_answers,
             filteredQuestion.correct_answer,
@@ -24,7 +32,17 @@ export const Question = ({
 
         setCorrectAnswer(filteredQuestion.correct_answer);
         setAnswersRandom(answers.sort(() => Math.random() - 0.7));
-    }, [filteredQuestion]);
+        setUsedQuestions(new Set(usedQuestions).add(filteredQuestion.id));
+    }, [filteredQuestion, setIndexQuestion, usedQuestions]);
+
+    const getRandomQuestion = () => {
+        const availableQuestions = questionsFiltered.filter(q => !usedQuestions.has(q.id));
+        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+        return {
+            index: randomIndex,
+            question: availableQuestions[randomIndex],
+        };
+    };
 
     const checkAnswer = (answerText, index) => {
         if (answerText === filteredQuestion.correct_answer) {
@@ -35,7 +53,8 @@ export const Question = ({
     };
 
     const onNextQuestion = () => {
-        setIndexQuestion(indexQuestion + 1);
+        const newQuestion = getRandomQuestion();
+        setIndexQuestion(newQuestion.index);
         setSelectAnswerIndex(null);
         setAnswered(false);
     };
@@ -44,6 +63,7 @@ export const Question = ({
         setScore(0);
         setActiveQuiz(false);
         setIndexQuestion(0);
+        setUsedQuestions(new Set());
     };
 
     return (
@@ -55,7 +75,7 @@ export const Question = ({
                     onReset={onReset}
                 />
             ) : (
-                <div className='flex flex-col justify-between shadow-md shadow-slate-300 w-full max-w-lg mx-auto h-auto p-10 rounded-lg'>
+                <div className='flex flex-col justify-between shadow-md shadow-slate-300 w-full max-w-lg mx-auto h-auto p-10 rounded-lg bg-white bg-opacity-90'>
                     <div className='flex justify-between'>
                         <span className='text-xl font-bold'>
                             {indexQuestion + 1} / {questionsFiltered.length}
