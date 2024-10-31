@@ -9,7 +9,7 @@ export const Navbar = () => {
             <div className='container mx-auto flex justify-between items-center'>
                 <Link to='/'>
                     <h1 className='text-white text-2xl font-bold hover:scale-110 transition-all duration-500'>
-                        Quiz SUD 2024 ver-01 hecho AUDAVIALL
+                        Quiz SUD -Granada  2024  AUDAVIALL
                     </h1>
                 </Link>
                 <button
