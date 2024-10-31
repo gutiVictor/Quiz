@@ -1,8 +1,19 @@
 [build]
   command = "npm run build"
-  publish = "build"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "applicatWe love that you love Bito’s AI Code Completions!
+You have hit your limit of 50 AI Code Completions per month on the free plan.
+To receive more Completions, please upgrade your plan or contact mailto:support@bito.aiWe love that you love Bito’s AI Code Completions!
+You have hit your limit of 50 AI Code Completions per month on the free plan.
+To receive more Completions, please upgrade your plan or contact mailto:support@bito.aiWe love that you love Bito’s AI Code Completions!
+You have hit your limit of 50 AI Code Completions per month on the free plan.
+To receive more Completions, please upgrade your plan or contact mailto:support@bito.ai 
