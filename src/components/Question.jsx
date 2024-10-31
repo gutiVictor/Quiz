@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Results } from './Results';
+import Timer from './Timer';
 
 export const Question = ({
     filteredQuestion,
@@ -15,34 +16,17 @@ export const Question = ({
     const [answersRandom, setAnswersRandom] = useState([]);
     const [activeResults, setActiveResults] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState('');
-    const [usedQuestions, setUsedQuestions] = useState(new Set());
+    const [timerTime, setTimerTime] = useState(22);
 
     useEffect(() => {
-        if (usedQuestions.has(filteredQuestion.id)) {
-            // Si la pregunta ya ha sido utilizada, selecciona una nueva pregunta
-            const newQuestion = getRandomQuestion();
-            setIndexQuestion(newQuestion.index);
-            return;
-        }
-
         const answers = [
             ...filteredQuestion.incorrect_answers,
             filteredQuestion.correct_answer,
         ];
-
         setCorrectAnswer(filteredQuestion.correct_answer);
         setAnswersRandom(answers.sort(() => Math.random() - 0.7));
-        setUsedQuestions(new Set(usedQuestions).add(filteredQuestion.id));
-    }, [filteredQuestion, setIndexQuestion, usedQuestions]);
-
-    const getRandomQuestion = () => {
-        const availableQuestions = questionsFiltered.filter(q => !usedQuestions.has(q.id));
-        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-        return {
-            index: randomIndex,
-            question: availableQuestions[randomIndex],
-        };
-    };
+        setTimerTime(22); // Reinicia el temporizador al cargar una nueva pregunta
+    }, [filteredQuestion]);
 
     const checkAnswer = (answerText, index) => {
         if (answerText === filteredQuestion.correct_answer) {
@@ -50,20 +34,26 @@ export const Question = ({
         }
         setSelectAnswerIndex(index);
         setAnswered(true);
+        setTimerTime(22); // Reinicia el temporizador al responder
+    };
+
+    const onTimeout = () => {
+        setSelectAnswerIndex(null);
+        setAnswered(true);
+        onNextQuestion();
     };
 
     const onNextQuestion = () => {
-        const newQuestion = getRandomQuestion();
-        setIndexQuestion(newQuestion.index);
+        setIndexQuestion(indexQuestion + 1);
         setSelectAnswerIndex(null);
         setAnswered(false);
+        setTimerTime(22); // Reinicia el temporizador para la siguiente pregunta
     };
 
     const onReset = () => {
         setScore(0);
         setActiveQuiz(false);
         setIndexQuestion(0);
-        setUsedQuestions(new Set());
     };
 
     return (
@@ -75,7 +65,7 @@ export const Question = ({
                     onReset={onReset}
                 />
             ) : (
-                <div className='flex flex-col justify-between shadow-md shadow-slate-300 w-full max-w-lg mx-auto h-auto p-10 rounded-lg bg-white bg-opacity-90'>
+                <div className='flex flex-col justify-between shadow-md shadow-slate-300 w-full max-w-lg mx-auto h-auto p-10 rounded-lg'>
                     <div className='flex justify-between'>
                         <span className='text-xl font-bold'>
                             {indexQuestion + 1} / {questionsFiltered.length}
@@ -97,6 +87,8 @@ export const Question = ({
                     <div>
                         <h1 className='font-bold'>{filteredQuestion.question}</h1>
                     </div>
+
+                    <Timer time={timerTime} onTimeout={onTimeout} />
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         {answersRandom.map((answer, index) => (
@@ -120,21 +112,18 @@ export const Question = ({
                         ))}
                     </div>
 
-                    {/* Mostrar respuesta correcta si es incorrecta */}
                     {answered && selectAnswerIndex !== null && (
                         <p className='mt-3'>
                             La respuesta correcta es: <strong>{correctAnswer}</strong>
                         </p>
                     )}
 
-                    {/* Botón para regresar al menú principal */}
                     <Link to='/' className='mt-4'>
                         <button className='border-2 border-yellow-600 text-yellow-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium'>
                             Regresar al Menú Principal
                         </button>
                     </Link>
 
-                    {/* Botón condicional para finalizar el quiz */}
                     {indexQuestion + 1 === questionsFiltered.length ? (
                         <button
                             className='border-2 border-yellow-600 text-yellow-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium mt-2'
