@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Question } from '../components/Question';
 import { questions, imgs } from '../data';
 
-// Función para barajar las preguntas de cada categoría y también reducirla al número de 7
-const shuffleArray = array => {
+// Función para barajar las preguntas de cada categoría y reducirla a la cantidad deseada
+const shuffleArray = (array, num) => {
     const newArray = array.sort(() => Math.random() - 0.5);
-    return newArray.slice(0, 8);
+    return newArray.slice(0, num);
 };
 
 // Función para normalizar la dificultad
@@ -15,7 +15,6 @@ const normalizeDifficulty = (difficulty) => {
 };
 
 export const CategoryPage = () => {
-    // Leer El parametro de la URL
     const { category } = useParams();
 
     const [imgCategory] = imgs.filter(
@@ -25,25 +24,36 @@ export const CategoryPage = () => {
     const [questionsFiltered, setQuestionsFiltered] = useState([]);
     const [indexQuestion, setIndexQuestion] = useState(0);
     const [activeQuiz, setActiveQuiz] = useState(false);
-    const [selectedDifficulty, setSelectedDifficulty] = useState(null); // Nuevo estado
+    const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+
+    // Cantidades de preguntas por dificultad
+    const questionCounts = {
+        fácil: 7,
+        medio: 7,
+        difícil: 7,
+        aleatorio: 7
+    };
 
     useEffect(() => {
         const filteredQuestions = questions.filter(question => question.category === category);
-        const newQuestions = shuffleArray(filteredQuestions);
-        setQuestionsFiltered(newQuestions);
+        setQuestionsFiltered(filteredQuestions);
     }, [category]);
 
-    const handleStartQuiz = (difficulty) => { // Nueva función
+    const handleStartQuiz = (difficulty) => {
         setSelectedDifficulty(difficulty);
         setActiveQuiz(true);
     };
 
-    const filteredQuestionsByDifficulty = selectedDifficulty // Nuevo filtro
+    const filteredQuestionsByDifficulty = selectedDifficulty
         ? questionsFiltered.filter(question => normalizeDifficulty(question.difficulty) === normalizeDifficulty(selectedDifficulty))
         : questionsFiltered;
 
-    // Asegurarse de que siempre haya exactamente 7 preguntas
-    const finalQuestions = shuffleArray(filteredQuestionsByDifficulty);
+    // Determinar la cantidad de preguntas según la dificultad seleccionada
+    const numQuestions = selectedDifficulty
+        ? questionCounts[normalizeDifficulty(selectedDifficulty)]
+        : questionCounts.aleatorio;
+
+    const finalQuestions = shuffleArray(filteredQuestionsByDifficulty, numQuestions);
 
     return (
         <div
@@ -69,7 +79,7 @@ export const CategoryPage = () => {
                             <img
                                 src={imgCategory}
                                 alt={category}
-                                className='w-60' // tamaño de la imagen de la categoría
+                                className='w-60'
                             />
                         </div>
                     </div>
