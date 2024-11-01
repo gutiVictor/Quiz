@@ -25,7 +25,7 @@ export const Question = ({
         ];
         setCorrectAnswer(filteredQuestion.correct_answer);
         setAnswersRandom(answers.sort(() => Math.random() - 0.7));
-        setTimerTime(90); // Reinicia el temporizador al cargar una nueva pregunta
+        setTimerTime(10); // Reinicia el temporizador al cargar una nueva pregunta
     }, [filteredQuestion]);
 
     const checkAnswer = (answerText, index) => {
@@ -34,7 +34,7 @@ export const Question = ({
         }
         setSelectAnswerIndex(index);
         setAnswered(true);
-        setTimerTime(90); // Reinicia el temporizador al responder
+        setTimerTime(10); // Reinicia el temporizador al responder
     };
 
     const onTimeout = () => {
