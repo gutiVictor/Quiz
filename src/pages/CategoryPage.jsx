@@ -28,10 +28,10 @@ export const CategoryPage = () => {
 
     // Cantidades de preguntas por dificultad
     const questionCounts = {
-        fácil: 7,
-        medio: 7,
-        difícil: 7,
-        aleatorio: 7
+        facil: 5,
+        medio: 2,
+        dificil: 11,
+        aleatorio: 2
     };
 
     useEffect(() => {
@@ -88,9 +88,9 @@ export const CategoryPage = () => {
                         <h2 className='text-2xl font-bold text-center'>Selecciona la dificultad:</h2>
                         <button
                             className='text-white bg-gray-900 py-2 rounded-lg font-bold px-5 transition-all hover:bg-yellow-500 hover:text-gray-900'
-                            onClick={() => handleStartQuiz('Fácil')}
+                            onClick={() => handleStartQuiz('Facil')}
                         >
-                            Fácil
+                            Facil
                         </button>
                         <button
                             className='text-white bg-gray-900 py-2 rounded-lg font-bold px-5 transition-all hover:bg-yellow-500 hover:text-gray-900'
@@ -100,9 +100,9 @@ export const CategoryPage = () => {
                         </button>
                         <button
                             className='text-white bg-gray-900 py-2 rounded-lg font-bold px-5 transition-all hover:bg-yellow-500 hover:text-gray-900'
-                            onClick={() => handleStartQuiz('Difícil')}
+                            onClick={() => handleStartQuiz('Dificil')}
                         >
-                            Difícil
+                            Dificil
                         </button>
                         <button
                             className='text-white bg-gray-900 py-2 rounded-lg font-bold px-5 transition-all hover:bg-yellow-500 hover:text-gray-900'
