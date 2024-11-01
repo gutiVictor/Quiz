@@ -28,10 +28,10 @@ export const CategoryPage = () => {
 
     // Cantidades de preguntas por dificultad
     const questionCounts = {
-        facil: 5,
-        medio: 2,
-        dificil: 11,
-        aleatorio: 2
+        facil: 8,
+        medio: 7,
+        dificil: 6,
+        aleatorio: 8
     };
 
     useEffect(() => {
