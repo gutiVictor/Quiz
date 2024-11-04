@@ -16,25 +16,28 @@ export const Question = ({
     const [answersRandom, setAnswersRandom] = useState([]);
     const [activeResults, setActiveResults] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState('');
-    const [timerTime, setTimerTime] = useState(90);
+    const [timerTime, setTimerTime] = useState(13);
 
     useEffect(() => {
-        const answers = [
-            ...filteredQuestion.incorrect_answers,
-            filteredQuestion.correct_answer,
-        ];
-        setCorrectAnswer(filteredQuestion.correct_answer);
-        setAnswersRandom(answers.sort(() => Math.random() - 0.7));
-        setTimerTime(10); // Reinicia el temporizador al cargar una nueva pregunta
-    }, [filteredQuestion]);
+        if (filteredQuestion) {
+            const answers = [
+                ...filteredQuestion.incorrect_answers,
+                filteredQuestion.correct_answer,
+            ];
+            setCorrectAnswer(filteredQuestion.correct_answer);
+            setAnswersRandom(answers.sort(() => Math.random() - 0.5));
+            setTimerTime(13); // Reinicia el temporizador al cargar una nueva pregunta
+            setAnswered(false); // Resetea el estado de respuesta al cargar una nueva pregunta
+            setSelectAnswerIndex(null); // Reinicia la selección de respuesta
+        }
+    }, [filteredQuestion, indexQuestion]);
 
     const checkAnswer = (answerText, index) => {
         if (answerText === filteredQuestion.correct_answer) {
             setScore(score + 1);
         }
         setSelectAnswerIndex(index);
-        setAnswered(true);
-        setTimerTime(10); // Reinicia el temporizador al responder
+        setAnswered(true); // Detiene el temporizador al responder
     };
 
     const onTimeout = () => {
@@ -44,10 +47,11 @@ export const Question = ({
     };
 
     const onNextQuestion = () => {
-        setIndexQuestion(indexQuestion + 1);
-        setSelectAnswerIndex(null);
-        setAnswered(false);
-        setTimerTime(90); // Reinicia el temporizador para la siguiente pregunta
+        if (indexQuestion + 1 < questionsFiltered.length) {
+            setIndexQuestion(indexQuestion + 1);
+        } else {
+            setActiveResults(true);
+        }
     };
 
     const onReset = () => {
@@ -55,6 +59,10 @@ export const Question = ({
         setActiveQuiz(false);
         setIndexQuestion(0);
     };
+
+    if (!filteredQuestion) {
+        return <p>Cargando pregunta...</p>;
+    }
 
     return (
         <>
@@ -78,6 +86,10 @@ export const Question = ({
                         </div>
                     </div>
 
+                    <div className='text-gray-700 text-lg font-semibold mb-4'>
+                        ID de la pregunta: {filteredQuestion.id}
+                    </div>
+
                     <button
                         className='border px-5 py-2 rounded-lg font-bold transition-all hover:bg-yellow-500 hover:text-gray-900'
                         onClick={onReset}
@@ -88,7 +100,7 @@ export const Question = ({
                         <h1 className='font-bold'>{filteredQuestion.question}</h1>
                     </div>
 
-                    <Timer time={timerTime} onTimeout={onTimeout} />
+                    <Timer time={timerTime} onTimeout={onTimeout} active={!answered} />
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         {answersRandom.map((answer, index) => (
@@ -103,7 +115,7 @@ export const Question = ({
                                 }`}
                                 key={answer}
                                 onClick={() => checkAnswer(answer, index)}
-                                disabled={answered && selectAnswerIndex !== index}
+                                disabled={answered}
                             >
                                 <p className='font-medium text-center text-sm'>
                                     {answer}

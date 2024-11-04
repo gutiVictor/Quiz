@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Question } from '../components/Question';
-import { questions, imgs } from '../data';
+import { questions, imgs } from '../dataold';
 
-// Función para barajar las preguntas de cada categoría y reducirla a la cantidad deseada
-const shuffleArray = (array, num) => {
-    const newArray = array.sort(() => Math.random() - 0.5);
-    return newArray.slice(0, num);
+// Nueva función para seleccionar preguntas únicas sin repetir
+const selectUniqueQuestions = (array, num) => {
+    const selectedQuestions = new Set();
+    while (selectedQuestions.size < num && selectedQuestions.size < array.length) {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        selectedQuestions.add(array[randomIndex]);
+    }
+    return Array.from(selectedQuestions);
 };
 
 // Función para normalizar la dificultad
@@ -53,7 +57,8 @@ export const CategoryPage = () => {
         ? questionCounts[normalizeDifficulty(selectedDifficulty)]
         : questionCounts.aleatorio;
 
-    const finalQuestions = shuffleArray(filteredQuestionsByDifficulty, numQuestions);
+    // Usa `selectUniqueQuestions` para seleccionar preguntas sin repeticiones
+    const finalQuestions = selectUniqueQuestions(filteredQuestionsByDifficulty, numQuestions);
 
     return (
         <div

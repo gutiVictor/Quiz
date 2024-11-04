@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { imgs, categories } from '../data';
+import { imgs, categories } from '../dataold';
 import { CategoryCard } from './CategoryCard';
 
 const [
@@ -14,50 +13,43 @@ const [
 
 export const CategoryList = () => {
     return (
-        <div className='flex flex-row flex-wrap justify-center gap-4 mt-10'>
-            {/* Category Link LIbro */}
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10'>
             <CategoryCard
                 category={categories.libro}
                 src={imglibro}
                 alt={`Categoría ${categories.libro}`}
-                gradientColor=' from-purple-500 to-pink-500'
+                gradientColor='from-purple-500 to-pink-500'
             />
-            {/* Category Link Antiguo */}
             <CategoryCard
                 category={categories.antiguo}
                 src={imgAntiguo}
                 alt={`Categoría ${categories.antiguo}`}
                 gradientColor='from-lime-400 to-teal-700'
             />
-            {/* Category Link Nuevo */}
             <CategoryCard
                 category={categories.nuevo}
                 src={imgNuevo}
                 alt={`Categoría ${categories.nuevo}`}
                 gradientColor='from-red-400 to-zinc-400'
             />
-            {/* Category Link Doctrina */}
             <CategoryCard
                 category={categories.doctrina}
                 src={imgDoctrina}
                 alt={`Categoría ${categories.doctrina}`}
                 gradientColor='from-cyan-200 to-lime-200'
             />
-            {/* Category Link Historia */}
             <CategoryCard
                 category={categories.historia}
                 src={imgHistoria}
                 alt={`Categoría ${categories.historia}`}
                 gradientColor='from-sky-300 to-indigo-900'
             />
-            {/* Category Link Perla */}
             <CategoryCard
                 category={categories.perla}
                 src={imgPerla}
                 alt={`Categoría ${categories.perla}`}
                 gradientColor='from-amber-400 to-emerald-600'
             />
-            {/* Category Link Ordenanzas */}
             <CategoryCard
                 category={categories.ordenanzas}
                 src={imgOrdenanzas}

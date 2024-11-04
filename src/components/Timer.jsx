@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
-const Timer = ({ time, onTimeout }) => {
+const Timer = ({ time, onTimeout, active }) => {
     const [seconds, setSeconds] = useState(time);
 
+    // Reiniciar el temporizador cuando `time` o `active` cambian
     useEffect(() => {
-        if (seconds > 0) {
-            const timer = setTimeout(() => {
-                setSeconds(seconds - 1);
-            }, 1000);
+        if (active) {
+            setSeconds(time);
+        }
+    }, [time, active]);
 
-            return () => clearTimeout(timer);
-        } else {
+    useEffect(() => {
+        if (!active || seconds <= 0) return;
+
+        const timer = setInterval(() => {
+            setSeconds(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [seconds, active]);
+
+    useEffect(() => {
+        if (seconds === 0) {
             onTimeout();
         }
     }, [seconds, onTimeout]);
-
-    useEffect(() => {
-        setSeconds(time);
-    }, [time]);
 
     return (
         <div className='text-center text-lg font-bold'>
