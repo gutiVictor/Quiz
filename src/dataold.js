@@ -556,7 +556,7 @@ export const questions = [
     correct_answer: "Mormón",
     incorrect_answers: ["Moroni", "Nefi", "Alma"],
   },
-  {
+  /* {
     id: 56,
     difficulty: "Fácil",
     question:
@@ -564,7 +564,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 57,
     difficulty: "Medio",
@@ -587,7 +587,7 @@ export const questions = [
     correct_answer: "Éter",
     incorrect_answers: ["Mormón", "Moroni", "Nefi"],
   },
-  {
+  /* {
     id: 59,
     difficulty: "Fácil",
     question:
@@ -595,7 +595,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 60,
     difficulty: "Medio",
@@ -618,7 +618,7 @@ export const questions = [
     correct_answer: "Mormón",
     incorrect_answers: ["Moroni", "Nefi", "Alma"],
   },
-  {
+  /* {
     id: 62,
     difficulty: "Fácil",
     question:
@@ -626,7 +626,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 63,
     difficulty: "Medio",
@@ -649,7 +649,7 @@ export const questions = [
     correct_answer: "Éter",
     incorrect_answers: ["Mormón", "Moroni", "Nefi"],
   },
-  {
+ /*  {
     id: 65,
     difficulty: "Fácil",
     question:
@@ -657,7 +657,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 66,
     difficulty: "Medio",
@@ -680,7 +680,7 @@ export const questions = [
     correct_answer: "Mormón",
     incorrect_answers: ["Moroni", "Nefi", "Alma"],
   },
-  {
+  /* {
     id: 68,
     difficulty: "Fácil",
     question:
@@ -688,7 +688,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 69,
     difficulty: "Medio",
@@ -711,7 +711,7 @@ export const questions = [
     correct_answer: "Éter",
     incorrect_answers: ["Mormón", "Moroni", "Nefi"],
   },
-  {
+ /*  {
     id: 71,
     difficulty: "Fácil",
     question:
@@ -719,7 +719,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 72,
     difficulty: "Medio",
@@ -742,7 +742,7 @@ export const questions = [
     correct_answer: "Mormón",
     incorrect_answers: ["Moroni", "Nefi", "Alma"],
   },
-  {
+ /*  {
     id: 74,
     difficulty: "Fácil",
     question:
@@ -750,7 +750,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 75,
     difficulty: "Medio",
@@ -773,7 +773,7 @@ export const questions = [
     correct_answer: "Éter",
     incorrect_answers: ["Mormón", "Moroni", "Nefi"],
   },
-  {
+  /* {
     id: 77,
     difficulty: "Fácil",
     question:
@@ -781,7 +781,7 @@ export const questions = [
     category: libro,
     correct_answer: "Benjamin",
     incorrect_answers: ["Mosíah", "Nefi", "Alma"],
-  },
+  }, */
   {
     id: 78,
     difficulty: "Medio",
