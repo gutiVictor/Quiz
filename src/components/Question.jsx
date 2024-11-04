@@ -16,7 +16,7 @@ export const Question = ({
     const [answersRandom, setAnswersRandom] = useState([]);
     const [activeResults, setActiveResults] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState('');
-    const [timerTime, setTimerTime] = useState(13);
+    const [timerTime, setTimerTime] = useState(20);
 
     useEffect(() => {
         if (filteredQuestion) {
@@ -26,7 +26,7 @@ export const Question = ({
             ];
             setCorrectAnswer(filteredQuestion.correct_answer);
             setAnswersRandom(answers.sort(() => Math.random() - 0.5));
-            setTimerTime(13); // Reinicia el temporizador al cargar una nueva pregunta
+            setTimerTime(20); // Reinicia el temporizador al cargar una nueva pregunta
             setAnswered(false); // Resetea el estado de respuesta al cargar una nueva pregunta
             setSelectAnswerIndex(null); // Reinicia la selección de respuesta
         }
