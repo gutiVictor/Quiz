@@ -5,7 +5,7 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className='bg-gray-900 py-5'>
+        <header className='bg-yellow-500 bg-opacity-400 py-5'>
             <div className='container mx-auto flex justify-center items-center'>
                 <Link to='/'>
                     <h1 className='text-white text-2xl font-bold hover:scale-110 transition-all duration-500 text-center'>
@@ -34,9 +34,9 @@ export const Navbar = () => {
             </div>
             <nav className={`${isOpen ? 'block' : 'hidden'} md:flex md:items-center md:w-auto`}>
                 <ul className='md:flex md:space-x-4'>
-                    <li>
+                <li className='ml-10'>
                         <Link to='/' className='text-white hover:text-gray-300 block mt-4 md:inline-block md:mt-0'>
-                            Inicio
+                           INICIO
                         </Link>
                     </li>
                     {/* <li>

@@ -8,9 +8,10 @@ export const CategoryCard = ({
 }) => {
     return (
         <Link
-            to={`/category/${category}`}
-            className={`flex flex-col justify-between rounded-2xl overflow-hidden bg-gradient-to-r ${gradientColor} transition-all hover:scale-105`}
-        >
+    to={`/category/${category}`}
+    className="flex flex-col justify-between rounded-2xl overflow-hidden bg-orange-200 transition-all hover:scale-105" // Cambia 'bg-green-500' al color que prefieras
+>
+
             <div className='p-5 flex justify-center items-center'>
                 <img src={src} alt={alt} className='w-36 sm:w-24 md:w-32 lg:w-36' /> {/* tamaño card imagen */}
             </div>
