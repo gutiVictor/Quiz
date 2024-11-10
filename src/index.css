@@ -4,10 +4,10 @@
 @tailwind utilities;
 
 body {
-    background: linear-gradient(135deg, #FFD700, #3d3b2e , #a89944);
+   background: linear-gradient(135deg, #cecdc9, #3d3b2e , #a89944);
     background-size: 400% 400%;
     background-attachment: fixed;
-    color: #333;
+    color: #050505;
     font-family: 'Arial', sans-serif;
     
 }
