@@ -131,14 +131,14 @@ export const Question = ({
                     )}
 
                     <Link to='/' className='mt-4'>
-                        <button className='border-2 border-yellow-600 text-yellow-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium'>
+                        <button className='border-2 border-red-900 text-black rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium'>
                             Regresar al Menú Principal
                         </button>
                     </Link>
 
                     {indexQuestion + 1 === questionsFiltered.length ? (
                         <button
-                            className='border-2 border-yellow-600 text-yellow-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium mt-2'
+                             className='border-2 border-red-900 text-black-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium mt-2'
                             onClick={() => {
                                 setAnswered(false);
                                 setActiveResults(true);
@@ -148,7 +148,7 @@ export const Question = ({
                         </button>
                     ) : (
                         <button
-                            className='border-2 border-yellow-600 text-yellow-600 rounded-md px-5 py-2 hover:bg-yellow-600 hover:text-black font-medium mt-2'
+                           className='border-2 border-red-900 text-black rounded-md px-5 py-2 hover:bg-blue-500 hover:text-black font-medium mt-2 stroke-black'
                             onClick={onNextQuestion}
                         >
                             Siguiente Pregunta
